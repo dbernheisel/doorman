@@ -39,14 +39,23 @@ defmodule Doorman.Auth.Bcrypt do
   `hashed_password` change on the changeset.
   """
   def hash_password(changeset) do
-    password = Ecto.Changeset.get_change(changeset, :password)
+    if Code.ensure_loaded? Ecto.Changeset do
+      password = Ecto.Changeset.get_change(changeset, :password)
 
-    if password do
-      hashed_password = Bcrypt.hashpwsalt(password)
-      changeset
-      |> Changeset.put_change(:hashed_password, hashed_password)
+      if password do
+        hashed_password = Bcrypt.hashpwsalt(password)
+        changeset
+        |> Changeset.put_change(:hashed_password, hashed_password)
+      else
+        changeset
+      end
     else
-      changeset
+      raise """
+        Ecto is not in your project's dependencies.
+
+        This module (#{__MODULE__}) requires Ecto.Changeset to be included in
+        your project's mix.exs dependencies.
+      """
     end
   end
 

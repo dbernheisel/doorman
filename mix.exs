@@ -9,9 +9,9 @@ defmodule Doorman.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: "Tools to make Elixir authentication simple and flexible",
-     package: package,
+     package: package(),
      docs: [extras: ["README.md"], main: "readme"],
-     deps: deps]
+     deps: deps()]
   end
 
   def application do
@@ -21,7 +21,7 @@ defmodule Doorman.Mixfile do
   defp deps do
     [{:plug, "~> 1.0"},
      {:comeonin, "~> 2.4"},
-     {:ecto, "~> 2.0", only: :test},
+     {:ecto, "~> 2.0", optional: true},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}]
   end
