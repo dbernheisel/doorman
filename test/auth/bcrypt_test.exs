@@ -45,3 +45,4 @@ defmodule Doorman.Auth.BcryptTest do
     refute Bcrypt.authenticate(user, "wrong")
   end
 end
+

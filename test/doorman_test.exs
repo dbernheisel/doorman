@@ -2,9 +2,6 @@ defmodule DoormanTest do
   use Doorman.ConnCase
   doctest Doorman
 
-  @valid_id 1
-  @invalid_id 2
-
   @valid_email "joe@dirt.com"
 
   defmodule FakeSuccessRepo do
